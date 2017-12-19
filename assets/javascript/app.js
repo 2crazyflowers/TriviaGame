@@ -3,64 +3,64 @@
 
 //have one array of questions
 //have one array ea of possible answers where all possibilities are in index[i] or do I have an array each of answers for each question
-var quesAns = ["How much money did guy from Payback want to be paid back?",
-	"How did he do that?",
-	"When did she do that?",
-	"Which one did this happen in?"];
+// var questions = [
+//   {
+//     "question":"What the name of Queen Elizabeth's sister?",
+//     "guesses":["Mary","Jane","Wilemina","Margaret"],
+//     "answer":"Margaret"
 
+var quesAns = {
+one: [{
+	questionOne: "Who was the actor that played Danny in Grease?",
+	answersOne: ["John Travolta", "blah2", "blah3", "blah4"],
+	answerOneKey: "John Travolta"
+	}],
 
-// one: {
-// 	questionOne: "Who was the actor that played Danny in Grease?",
-// 	answersOne: "John Travolta", "blah2", "blah3", "blah4"
-// 	answerOneKey: "John Travolta"
-// 	},
+two: [{
+	questionTwo: "Which pill did Neo swallow in the movie The Matrix?",
+	answersTwo: ["the blue pill", "the purple pill", "the red pill",
+	"he chose neither pill"],
+	answerTwoKey: "the red pill"
+	}],
 
-// two: {
-// 	questionTwo: "Which pill did Neo swallow in the movie The Matrix?",
-// 	answersTwo: "the blue pill", "the purple pill", "the red pill",
-// 	"he chose neither pill"
-//	answerTwoKey: "the red pill"
-// 	},
+three: [{
+	questionThree: "What actor played the killer robot in the movie the Terminator",
+	answersThree: ["Arnold Schwarzenegger", "It was a real robot", "Hulk Hogan", "Jesse Ventura"],
+ answerThreeKey: "Arnold Schwarzenegger"
+	}],
 
-// three: {
-// 	questionThree: "What actor played the killer robot in the movie the Terminator",
-// 	answersThree: "Arnold Schwarzenegger", "It was a real robot", "Hulk Hogan", "Jesse Ventura",
-//  answerThreeKey: "Arnold Schwarzenegger"
-// 	},
+four: [{
+	questionFour: "In the movie John Wick, what incident made the John go back to his previous job of killing people?",
+	answersFour: ["Someone stole his car.", "Someone killed his dog.", "Someone blew up his house.", "Someone kissed him."],
+ answerFourKey: "Someone killed his dog."
+	}],
 
-// four: {
-// 	questionFour: "In the movie John Wick, what incident made the John go back to his previous job of killing people?",
-// 	answersFour: "Someone stole his car.", "Someone killed his dog.", "Someone blew up his house.", "Someone kissed him."
-//  answerFourKey: "Someone killed his dog."
-// 	},
+five: [{
+	questionFive: "Who played Groot in the Guardians of the Galaxy?",
+	answersFive: ["Vin Diesel", "Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme"],
+ answerFiveKey: "Vin Diesel"
+	}],
 
-// five: {
-// 	questionFive: "Who played Groot in the Guardians of the Galaxy?",
-// 	answersFive: "Vin Diesel", "Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme"
-//  answerFiveKey: "Vin Diesel"
-// 	},
+six: [{
+	questionSix: "Which one of the four houses does Hat choose for Harry Potter?",
+	answersSix: ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"],
+ answerSixKey: "Gryffindor"
+	}],
 
-// six: {
-// 	questionSix: "Which one of the four houses does Hat choose for Harry Potter?",
-// 	answersSix: "Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"
-//  answerSixKey: "Gryffindor"
-// 	},
+seven: [{
+	questionSeven: "In The Bourne Supremacy, Jason Bourne detinates a house to blow up using what supplies?",
+	answersSeven: ["Gas, magazine and a toaster", "Gun, a string and a ", "A cigarette, toilet paper and stove, and newspaper", "A popcorn popper, oil and a faulty wire"],
+ answerSevenKey: "Gas, magazine and a toaster"
+	}],
 
-//seven: {
-// 	questionSeven: "In The Bourne Supremacy, Jason Bourne detinates a house to blow up using what supplies?",
-// 	answersSeven: "Gas, magazine and a toaster", "Gun, a string and a ", "A cigarette, toilet paper and stove, and newspaper", "A popcorn popper, oil and a faulty wire"
-//  answerSevenKey: "Gas, magazine and a toaster"
-// 	},
+eight: [{
+	questionEight: "In the movie Payback, how much money did Porter (played by Mel Gibson) want to be paid back?",
+	answersEight: ["$140,000", "$100,000", "$70,000", "$300,000"],
+	answerOneKey: "$70,000"
+	}],	
+};
 
-// eight: {
-// 	questionEight: "In the movie Payback, how much money did Porter (played by Mel Gibson) want to be paid back?",
-// 	answersOne: "$140,000", "$100,000", "$70,000", "$300,000"
-// 	answerOneKey: "$70,000"
-// 	},
-// 	]
-// };
-
-// var questionsArray = [one.questionOne, two.questionTwo, three.questionThree, four.questionFour, five.questionFive, six.questionSix, seven.questionSeven, eight.questionEight];
+var questionsArray = [quesAns.one.questionOne, quesAns.two.questionTwo, quesAns.three.questionThree, quesAns.four.questionFour, quesAns.five.questionFive, quesAns.six.questionSix, quesAns.seven.questionSeven, quesAns.eight.questionEight];
 
 
 var answers =["$140,000", "$100,000", "$70,000", "$300,000"];
@@ -71,27 +71,28 @@ var answers =["$140,000", "$100,000", "$70,000", "$300,000"];
 //need to work count down
 
 //need to put up question and possible answers
-function playGame() {
+// function playGame() {
 
 //need to listen for click event
 //only allow one answer, not multiple
 //if correct answer then add to correct answers total
-$(".question").text(quesAns[0]);
+$(".question").text(quesAns.one[0].questionOne);
+console.log(quesAns.one[0]);
 //use frig to figure out buttons
-	for (var i=0;i<4; i++) {
-		var answerBtn = $("<button>");
-		answerBtn.addClass("btn btn-dark");
-		answerBtn.attr("data-answer", answers[i]);
-		answerBtn.text(answers[i]);
-		$(".multiplechoice").append(answerBtn);
-		// answerBtn.click(answerCheck);
+// 	for (var i=0;i<4; i++) {
+// 		var answerBtn = $("<button>");
+// 		answerBtn.addClass("btn btn-dark");
+// 		answerBtn.attr("data-answer", answers[i]);
+// 		answerBtn.text(answers[i]);
+// 		$(".multiplechoice").append(answerBtn);
+// 		// answerBtn.click(answerCheck);
 
-		console.log(answers[i]);
+// 		console.log(answers[i]);
 
 
-	};
-//if answer not correct then add to incorrect answers total
-};
+// 	};
+// //if answer not correct then add to incorrect answers total
+// };
 
 //need to have it go through all 5 questions
 // function renderQuestion() {
@@ -105,7 +106,7 @@ $(".question").text(quesAns[0]);
 //         }
 // }
 
-playGame();
+// playGame();
 
 // function answerCheck() {
 // 	crystalValue = ($(this).attr("data-answer"));
