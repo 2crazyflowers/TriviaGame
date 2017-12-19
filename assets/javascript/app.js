@@ -1,69 +1,60 @@
 //use question game from javascript - last exercise
 // and use fridge magnet game
 
-//have one array of questions
 //have one array ea of possible answers where all possibilities are in index[i] or do I have an array each of answers for each question
-// var questions = [
-//   {
-//     "question":"What the name of Queen Elizabeth's sister?",
-//     "guesses":["Mary","Jane","Wilemina","Margaret"],
-//     "answer":"Margaret"
 
 var quesAns = {
 one: [{
-	questionOne: "Who was the actor that played Danny in Grease?",
-	answersOne: ["John Travolta", "blah2", "blah3", "blah4"],
-	answerOneKey: "John Travolta"
+	question: "Who was the actor that played Sandy in Grease?",
+	answers: ["Carrie Fisher", "Olivia Newton-John", "Susan Dey", "Marie Osmond"],
+	answerKey: "Olivia Newton-John"
 	}],
 
 two: [{
-	questionTwo: "Which pill did Neo swallow in the movie The Matrix?",
-	answersTwo: ["the blue pill", "the purple pill", "the red pill",
+	question: "Which pill did Neo swallow in the movie The Matrix?",
+	answers: ["the blue pill", "the purple pill", "the red pill",
 	"he chose neither pill"],
-	answerTwoKey: "the red pill"
+	answerKey: "the red pill"
 	}],
 
 three: [{
-	questionThree: "What actor played the killer robot in the movie the Terminator",
-	answersThree: ["Arnold Schwarzenegger", "It was a real robot", "Hulk Hogan", "Jesse Ventura"],
- answerThreeKey: "Arnold Schwarzenegger"
+	question: "What actor played the killer robot in the movie the Terminator",
+	answers: ["Arnold Schwarzenegger", "It was a real robot", "Hulk Hogan", "Jesse Ventura"],
+ 	answerKey: "Arnold Schwarzenegger"
 	}],
 
 four: [{
-	questionFour: "In the movie John Wick, what incident made the John go back to his previous job of killing people?",
-	answersFour: ["Someone stole his car.", "Someone killed his dog.", "Someone blew up his house.", "Someone kissed him."],
- answerFourKey: "Someone killed his dog."
+	question: "In the movie John Wick, what incident made the John go back to his previous job of killing people?",
+	answers: ["Someone stole his car.", "Someone killed his dog.", "Someone blew up his house.", "Someone kissed him."],
+ 	answerKey: "Someone killed his dog."
 	}],
 
 five: [{
-	questionFive: "Who played Groot in the Guardians of the Galaxy?",
-	answersFive: ["Vin Diesel", "Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme"],
- answerFiveKey: "Vin Diesel"
+	question: "Who played Groot in the Guardians of the Galaxy?",
+	answers: ["Vin Diesel", "Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme"],
+ 	answerKey: "Vin Diesel"
 	}],
 
 six: [{
-	questionSix: "Which one of the four houses does Hat choose for Harry Potter?",
-	answersSix: ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"],
- answerSixKey: "Gryffindor"
+	question: "Which one of the four houses does Hat choose for Harry Potter?",
+	answers: ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"],
+ 	answerKey: "Gryffindor"
 	}],
 
 seven: [{
-	questionSeven: "In The Bourne Supremacy, Jason Bourne detinates a house to blow up using what supplies?",
-	answersSeven: ["Gas, magazine and a toaster", "Gun, a string and a ", "A cigarette, toilet paper and stove, and newspaper", "A popcorn popper, oil and a faulty wire"],
- answerSevenKey: "Gas, magazine and a toaster"
+	question: "In The Bourne Supremacy, Jason Bourne detinates a house to blow up using what supplies?",
+	answers: ["Gas, magazine and a toaster", "Gun, a string and a ", "A cigarette, toilet paper and stove, and newspaper", "A popcorn popper, oil and a faulty wire"],
+	answerKey: "Gas, magazine and a toaster"
 	}],
 
 eight: [{
-	questionEight: "In the movie Payback, how much money did Porter (played by Mel Gibson) want to be paid back?",
-	answersEight: ["$140,000", "$100,000", "$70,000", "$300,000"],
-	answerOneKey: "$70,000"
+	question: "In the movie Payback, how much money did Porter (played by Mel Gibson) want to be paid back?",
+	answers: ["$140,000", "$100,000", "$70,000", "$300,000"],
+	answerKey: "$70,000"
 	}],	
 };
 
-var questionsArray = [quesAns.one.questionOne, quesAns.two.questionTwo, quesAns.three.questionThree, quesAns.four.questionFour, quesAns.five.questionFive, quesAns.six.questionSix, quesAns.seven.questionSeven, quesAns.eight.questionEight];
-
-
-var answers =["$140,000", "$100,000", "$70,000", "$300,000"];
+// var questionsArray = [quesAns.one.question, quesAns.two.question, quesAns.three.question, quesAns.four.question, quesAns.five.question, quesAns.six.question, quesAns.seven.question, quesAns.eight.question];
 
 //do I randomize the possible answer order
 
@@ -71,64 +62,33 @@ var answers =["$140,000", "$100,000", "$70,000", "$300,000"];
 //need to work count down
 
 //need to put up question and possible answers
-// function playGame() {
+function playGame() {
 
 //need to listen for click event
 //only allow one answer, not multiple
 //if correct answer then add to correct answers total
-$(".question").text(quesAns.one[0].questionOne);
-console.log(quesAns.one[0]);
-//use frig to figure out buttons
-// 	for (var i=0;i<4; i++) {
-// 		var answerBtn = $("<button>");
-// 		answerBtn.addClass("btn btn-dark");
-// 		answerBtn.attr("data-answer", answers[i]);
-// 		answerBtn.text(answers[i]);
-// 		$(".multiplechoice").append(answerBtn);
-// 		// answerBtn.click(answerCheck);
-
-// 		console.log(answers[i]);
 
 
-// 	};
-// //if answer not correct then add to incorrect answers total
-// };
+	$(".question").text(quesAns.one[0].question);
+	console.log(quesAns.one[0].question);
 
-//need to have it go through all 5 questions
-// function renderQuestion() {
-// 	if (questionIndex <= (questionsArray.length - 1)) {
-//           document.querySelector("#question").innerHTML = questionsArray[questionIndex][0];
-//         }
-//         // If there aren't, render the end game screen.
-//         else {
-//           document.querySelector("#question").innerHTML = "Game Over!";
-//           document.querySelector("#score").innerHTML = "Final Score: " + score + " out of " + questionsArray.length;
-//         }
-// }
+// //use frig to figure out buttons
+	
+	for (var i=0; i<4; i++) {
+		
 
-// playGame();
+		var answerBtn = $("<button>");
+		answerBtn.addClass("btn btn-dark");
+		answerBtn.attr("data-answer", quesAns.one[0].answers[i]);
+		answerBtn.text(quesAns.one[0].answers[i]);
+		$(".multiplechoice").append(answerBtn);
+		// answerBtn.click(answerCheck);
 
-// function answerCheck() {
-// 	crystalValue = ($(this).attr("data-answer"));
-//     crystalValue = parseInt(crystalValue);
-
-//     counter += crystalValue;
-   
+		console.log(quesAns.one[0].answers[i]);
+	};
+}
 
 
-// 	if answerBtn === answerKey {
-// 		counterCorrect++;
-// 	}
 
-// 	else {
-// 		counterIncorrect++;
-// 	}
+playGame();
 
-//if all questions done then
-	// $(".counter-correct").text(counterCorrect);
-	//$(".counter-incorrect").text(coutnerIncorrect);
-    
-
-// reviewForMatch();
-
-//}
