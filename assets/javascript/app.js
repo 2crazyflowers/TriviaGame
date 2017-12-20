@@ -2,7 +2,6 @@
 // and use fridge magnet game
 
 //have one array ea of possible answers where all possibilities are in index[i] or do I have an array each of answers for each question
-
 var quesAns = {
 questArray: [{
 	question: "Who was the actor that played Sandy in Grease?",
@@ -40,7 +39,7 @@ questArray: [{
 	}]
 };
 
-
+var answerCheck = [];
 var index = 0;
 
 //do I randomize the possible answer order
@@ -52,6 +51,10 @@ var index = 0;
 
 
 //=====need to tell it in a new function that you need to check if it should go to next question========
+
+// function startBtn() {
+
+// }
 
 function renderQuestion() {
 //change this too to match ================ new code below
@@ -67,14 +70,16 @@ function renderQuestion() {
 
 			var answerBtn = $("<button>");
 			answerBtn.addClass("btn btn-dark");
-			answerBtn.attr("data-answer", quesAns.questArray[index].answers);
-			answerBtn.text(quesAns.questArray[index].answers);
+			answerBtn.attr("data-answer", quesAns.questArray[index].answers[i]);
+			answerBtn.text(quesAns.questArray[index].answers[i]);
 			$(".multiplechoice").append(answerBtn);
-			// answerBtn.click(answerCheck);
+			answerBtn.click(answerCheck);
 
-			console.log(quesAns.questArray[index].answers);
-			console.log(quesAns.questArray[index].answerKey)
+			console.log(quesAns.questArray[index].answers[i]);
+
 		};
+
+		console.log(quesAns.questArray[index].answerKey)
 	}
     // If there aren't, render the end game screen.
   //   else {
@@ -83,36 +88,23 @@ function renderQuestion() {
   //   }
 
 //need to listen for click event
-//only allow one answer, not multiple
-//if correct answer then add to correct answers total
-
-
-
-// //use frig to figure out buttons
-	
-	
-
-
-
 renderQuestion();
-// updateScore();
-
-document.onkeyup = function(event) {
-
-	// If there are no more questions, stop the function.
-	if (index === questionsArray.length) {
-	  return;
-	}
+ 
 
 
-	// If they guess the correct answer, increase and update score, alert them they got it right. and update index
-	if (userInput === quesAns.questArray[index].answerKey) {
+//create on-click event on the buttons
+$(".btn").on("click", function(event) {
+
+	//want to grab the value of button clicked and give it the name answerCheck
+	var answerCheck = $(this).text();
+    console.log(answerCheck);
+    console.log(quesAns.questArray[index].answerKey);
+
+	if (answerCheck === quesAns.questArray[index].answerKey) {
 		    alert("Correct!");
 		    correctScore++
 		    // updateScore();
 		    console.log(correctScore);
-		    
-
 	}
 	// If wrong, alert them they are wrong.
 	else {
@@ -125,8 +117,23 @@ document.onkeyup = function(event) {
 		index++;
 		console.log(index);
 		renderQuestion();
+	})
 
-	}
+//if correct answer then add to correct answers total
+
+
+
+	 
+	// If there are no more questions, stop the function.
+	// if (index === questionsArray.length) {
+	//   return;
+	// }
+
+
+	// If they guess the correct answer, increase and update score, alert them they got it right. and update index
+	
+
+	
 
 
 
