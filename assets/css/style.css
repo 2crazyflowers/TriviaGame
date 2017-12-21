@@ -7,7 +7,7 @@
 	/*background-color: black;*/
 /*	height and width do nothing to help size of image*/
 	background-image: url(../images/theater2.jpg);
-	height: auto;
+	height: 620px;
 	background-size: cover;
 	background-position: top;
 	background-repeat: no-repeat;
@@ -18,7 +18,7 @@ h1 {
 }
 
 .question {
-	text-shadow: 2px 2px white;
+	text-shadow: 1px 1px white;
 }
 
 .questionholder {
@@ -26,10 +26,17 @@ h1 {
 }
 
 .correct-answer {
-	color: red;
-	text-shadow: 2px 2px white;
+	color: #970006;
+	text-shadow: 1px 1px white;
 }
 
 .btn {
 	margin: 20px;
+	padding: 10px 50px;
+}
+
+.btn.btn-danger {
+	padding: 10px 50px;
+	font-size: 18px;
+	background-color: #970006;
 }

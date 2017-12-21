@@ -23,14 +23,14 @@ var quesAns = {
 	}, {
 		question: "Who played Groot in the Guardians of the Galaxy?",
 		answers: ["Vin Diesel", "Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme"],
-		answerKey: "Vin Diesel"
+		answerKey: "Vin Diesel",
 	}, {
 		question: "Which one of the four houses does Hat choose for Harry Potter?",
 		answers: ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"],
 		answerKey: "Gryffindor"
 	}, {
 		question: "In The Bourne Supremacy, Jason Bourne detinates a house using what supplies?",
-		answers: ["gas, magazine and a toaster", "gun, string and a sock", "cigarette, toilet paper and stove, and newspaper", "popcorn popper, oil and a faulty wire"],
+		answers: ["gas, magazine and a toaster", "gun, string and a sock", "cigarette, toilet paper and newspaper", "popcorn popper, oil and a faulty wire"],
 		answerKey: "gas, magazine and a toaster"
 	}, {
 		question: "In the movie Payback, how much money did Porter (played by Mel Gibson) want?",
@@ -68,7 +68,7 @@ function start() {
 
 	var startBtn = $("<button>");
 	startBtn.addClass("btn btn-danger");
-	startBtn.text("Start");
+	startBtn.text("Begin Game");
 	startBtn.click(function() { renderQuestion();});
 	$(".start-button").append(startBtn);
 }
@@ -79,13 +79,15 @@ function renderQuestion() {
     //   document.querySelector(".question").innerHTML = quesAns.questArray[index];
     $(".start-button").empty();
     $(".correct-answer").empty();
+
+
     $(".question").text(quesAns.questArray[index].question);
     console.log(quesAns.questArray[index].question);
     $(".multiplechoice").empty();
 
-    for (var i=0; i<4; i++) {
+    for (var i=0; i<quesAns.questArray[index].answers.length; i++) {
 
-    	var answerBtn = $("<button>");
+    	var answerBtn = $("<div>");
     	answerBtn.addClass("btn btn-dark choice");
     	answerBtn.attr("data-answer", quesAns.questArray[index].answers[i]);
     	answerBtn.text(quesAns.questArray[index].answers[i]);
@@ -100,15 +102,20 @@ function renderQuestion() {
 }
 
 function timer() {
-	number = 30;
+	number = 15;
 	intervalId = setInterval(decrement, 1000);
-	$(".timer").html("Time remaining :" + number + " seconds");
+	$(".timer").html("Time remaining: " + number);
+
 }
 
-    //  The stop function
-function stop() {
-  clearInterval(intervalId);
-}
+//     //  The stop function
+// function stop() {
+//   clearInterval(intervalId);
+//   continueGame();
+//   //renderQuestion(); 
+//   //had this first but this doesnt check index against array so never gets to endGame
+  
+// }
 
 
 
@@ -124,16 +131,24 @@ function decrement() {
 	//  Once number hits zero...
 	if (number === 0) {
 
-	//  ...run the stop function.
-	stop();
+		//  ...run the stop function.====cannot run stop function here
+		// stop();
+		//try this instead:
+		clearInterval(intervalId);
+		//  Alert the user that time is up.
+		$(".timer").html("Time is up!");
+		//timer still comes back and counts down to -5
+		$(".correct-answer").html("The correct answer was: " + quesAns.questArray[index].answerKey);
+		index++
+		console.log(index);
+		setTimeout(continueGame, 1000 * 5);
 
-	//  Alert the user that time is up.
-	alert("Time Up!");
 	}
 }
 
 function  continueGame() {	
-	stop(); 
+	//had stop() here before but it created a loop
+	clearInterval(intervalId);
 	// If there are no more questions, stop the function.
 	if (index === quesAns.questArray.length) {
 		endGame();
@@ -150,7 +165,9 @@ function endGame() {
 	$(".score").empty();
 	$(".question").empty();
 	$(".multiplechoice").empty();
+	$(".correct-answer").empty();
 	$(".timer").text("You had " + correctScore + " correct answers and " + incorrectScore + " incorrect answers!");
+	setTimeout(start, 1000 * 5);
 }
 
 //======================Main Game played here==============================
@@ -171,7 +188,9 @@ $(".multiplechoice").on("click", ".choice", function(event) {
 		correctScore++
 	    // updateScore();
 	    console.log(correctScore);
+	    index++
 	    continueGame();
+
 
 	}
 	// If wrong, alert them they are wrong.
@@ -179,15 +198,15 @@ $(".multiplechoice").on("click", ".choice", function(event) {
 		alert("Wrong!");
 		$(".correct-answer").html("The correct answer was: " + quesAns.questArray[index].answerKey);
 		incorrectScore++
-		stop();
+		clearInterval(intervalId);
+		index++
 		setTimeout(continueGame, 1000 * 5);
 		
 	}
 
-		// Increment the index variable and call the render question
-		index++
-		console.log(index);
-	})
+	// Increment the index variable and call the render question
+
+})
 
 //if correct answer then add to correct answers total
 
