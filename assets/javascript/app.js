@@ -46,43 +46,31 @@ var correctScore = 0;
 var number = 30;
 var intervalId;
 
-//do I randomize the possible answer order
 
-//all this in one function?
-//need to work count down
-
-//need to put up question and possible answers
-
-
-//=====need to tell it in a new function that you need to check if it should go to next question========
-
+//this function is only used to start the game the first time, not to play again
 function start() {
-	//empty divs
-	//empty countdown
-	//game name and start button only
-	$(".timer").empty();
-	$(".score").empty();
-	$(".question").empty();
-	$(".multiplechoice").empty();
-	$(".correct-answer").empty();
-	$(".incorrect-answer").empty();
 
+	//put start game button for user to click
 	var startBtn = $("<button>");
 	startBtn.addClass("btn btn-danger");
 	startBtn.text("Begin Game");
 	startBtn.click(function() { renderQuestion();});
 	$(".start-button").append(startBtn);
+
 }
 
+//this puts question and multiple choice answer buttons to html
 function renderQuestion() {
-//change this too to match ================ new code below
-
+	
+	//empty out html to add new information
     $(".start-button").empty();
     $(".correct-answer").empty();
-    $(".question").text(quesAns.questArray[index].question);
+    $(".question").html(quesAns.questArray[index].question);
     console.log(quesAns.questArray[index].question);
     $(".multiplechoice").empty();
+    $(".incorrect-answer").empty();
 
+    //to loop through all possible answers, puts them into buttons and append them to the browser
     for (var i=0; i<quesAns.questArray[index].answers.length; i++) {
 
     	var answerBtn = $("<button>");
@@ -94,11 +82,13 @@ function renderQuestion() {
 
     };
 
+    //starts countdown
     timer();
     console.log(quesAns.questArray[index].answerKey);
 
 }
 
+//countdown function, gives user 15 seconds to answer the question 
 function timer() {
 	number = 15;
 	intervalId = setInterval(decrement, 1000);
@@ -106,18 +96,8 @@ function timer() {
 
 }
 
-//     //  The stop function
-// function stop() {
-//   clearInterval(intervalId);
-//   continueGame();
-//   //renderQuestion(); 
-//   //had this first but this doesnt check index against array so never gets to endGame
-  
-// }
-
-
+//decrement/to decrease countdown number and it shows on broswer
 function decrement() {
-
 	//  Decrease number by one.
 	number--;
 
@@ -127,94 +107,105 @@ function decrement() {
 
 	//  Once number hits zero...
 	if (number === 0) {
-
-		//  ...run the stop function.====cannot run stop function here
-		// stop();
-		//try this instead:
+		
+		//creating a stop function did not work so put clearIntervals where I needed them
+		//else infinite loops were created in the functions
+		
 		clearInterval(intervalId);
+		
 		//  Alert the user that time is up.
 		$(".timer").html("Time is up!");
-		//timer still comes back and counts down to -5
+		$(".multiplechoice").empty();
 		$(".correct-answer").html("The correct answer was: " + quesAns.questArray[index].answerKey);
 		index++
-		console.log(index);
+		
+		//this allows user to see correct answer before continuing the game and rendering another question
 		setTimeout(continueGame, 1000 * 3);
 
 	}
 }
 
+//this function checks to see if all the questions have been asked, if yes it starts endGame function, if not it goes to render the next question
 function  continueGame() {	
+	
 	//had stop() here before but it created a loop
 	clearInterval(intervalId);
-	// If there are no more questions, stop the function.
+	
+	// if there are no more questions, stop the function
 	if (index === quesAns.questArray.length) {
 		endGame();
 	}
 
-	// If they guess the correct answer, increase and update score, alert them they got it right. and update index
+	// if there are more questions, countinue game and render another question/possible anwers to html
 	else {
 		renderQuestion();
 	}
 }
 
+//created endGame function to empty out html, let the user know their count of correct and incorrect answers and give an option to play again
 function endGame() {
+	
+	//empty out html
 	$(".timer").empty();
 	$(".score").empty();
 	$(".question").empty();
 	$(".multiplechoice").empty();
 	$(".correct-answer").empty();
-	$(".correct-answer").text("You had " + correctScore + " correct answers.");
+
+	//give user there incorrect/correct answer count
+	$(".correct-answer").html("You had " + correctScore + " correct answers.");
 	$(".incorrect-answer").html("You had " + incorrectScore + " incorrect answers.");
-	setTimeout(start, 1000 * 5);
+	
+	//needed to reset index here if the user chose to restart game
+	index = 0;
+	
+	//play again button
+	var startBtn = $("<button>");
+	startBtn.addClass("btn btn-danger");
+	startBtn.text("Play Again");
+	startBtn.click(function() { renderQuestion();});
+	$(".start-button").append(startBtn);
 }
 
-//======================Main Game played here==============================
-//need to listen for click event
+//=============Main Game played here==============
+//start game function
 start();
 
-
-//create on-click event on the buttons
+//create on-click event on the multiple choice buttons
 $(".multiplechoice").on("click", ".choice", function(event) {
 
-	//want to grab the value of button clicked and give it the name answerCheck
+	//grab the value of button clicked and give it the name answerCheck
 	var answerCheck = $(this).text();
 	console.log(answerCheck);
 	console.log(quesAns.questArray[index].answerKey);
 
+	//checks to see if user answer matches correct answer from answerKey
+	//adds to correctScore counter, add to index to move to next question, and continue game
 	if (answerCheck === quesAns.questArray[index].answerKey) {
 		// alert("Correct!");
 		correctScore++
-		$(".correct-answer").html("That is correct!");
+		$(".correct-answer").html("That is the correct answer!");
+		$(".multiplechoice").empty();
+		$(".timer").empty();
 		clearInterval(intervalId);
 	    index++
-	    setTimeout(continueGame, 1000 * 3);
+	    setTimeout(continueGame, 1000 * 2);
 
 
 	}
-	// If wrong, alert them they are wrong.
+	// If it is the wrong answer let them know correct answer, log to incorrectScore counter, add to index to move to next question, and continue game
 	else {
 		// alert("Wrong!");
 		$(".correct-answer").html("The correct answer was: " + quesAns.questArray[index].answerKey);
+		$(".multiplechoice").empty();
+		$(".timer").empty();
 		incorrectScore++
 		clearInterval(intervalId);
 		index++
 		setTimeout(continueGame, 1000 * 3);
 		
 	}
-
-	// Increment the index variable and call the render question
-
 })
-
-//if correct answer then add to correct answers total
-
-
-
-
-
-
-
-
 
 
 
