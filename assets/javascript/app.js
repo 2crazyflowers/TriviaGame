@@ -4,33 +4,33 @@
 //have one array ea of possible answers where all possibilities are in index[i] or do I have an array each of answers for each question
 var quesAns = {
 	questArray: [{
-		question: "Who was the actor that played Sandy in Grease?",
+		question: "Who played Sandy, the leading female role, in the movie Grease?",
 		answers: ["Carrie Fisher", "Olivia Newton-John", "Susan Dey", "Marie Osmond"],
 		answerKey: "Olivia Newton-John"
 	}, {
 		question: "Which pill did Neo swallow in the movie The Matrix?",
-		answers: ["pill", "purple", "red",
+		answers: ["blue", "purple", "red",
 		"none"],
 		answerKey: "red"
 	}, {
-		question: "What actor played the killer robot in the movie the Terminator?",
+		question: "What actor played the killer robot in the Terminator?",
 		answers: ["Arnold Schwarzenegger", "It was a real robot", "Hulk Hogan", "Jesse Ventura"],
 		answerKey: "Arnold Schwarzenegger"
 	}, {
 		question: "In the movie John Wick, what incident made the John start killing people?",
-		answers: ["someone stole his car", "someone killed his dog", "someone blew up his house", "someone kissed him"],
+		answers: ["someone stole his car", "someone blew up his house", "someone killed his dog", "someone kissed him"],
 		answerKey: "someone killed his dog"
 	}, {
 		question: "Who played Groot in the Guardians of the Galaxy?",
-		answers: ["Vin Diesel", "Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme"],
+		answers: ["Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme", "Vin Diesel"],
 		answerKey: "Vin Diesel",
 	}, {
-		question: "Which one of the four houses does Hat choose for Harry Potter?",
-		answers: ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"],
+		question: "In the movie Harry Potter, which  house does Hat choose for Harry Potter?",
+		answers: [ "Slytherin", "Hufflepuff", "Gryffindor", "Ravenclaw"],
 		answerKey: "Gryffindor"
 	}, {
 		question: "In The Bourne Supremacy, Jason Bourne detinates a house using what supplies?",
-		answers: ["gas, magazine and a toaster", "gun, string and a sock", "cigarette, toilet paper and newspaper", "popcorn popper, oil and a faulty wire"],
+		answers: ["gun, string and a sock", "gas, magazine and a toaster", "cigarette, toilet paper and newspaper", "popcorn popper, oil and a faulty wire"],
 		answerKey: "gas, magazine and a toaster"
 	}, {
 		question: "In the movie Payback, how much money did Porter (played by Mel Gibson) want?",
@@ -65,6 +65,7 @@ function start() {
 	$(".question").empty();
 	$(".multiplechoice").empty();
 	$(".correct-answer").empty();
+	$(".incorrect-answer").empty();
 
 	var startBtn = $("<button>");
 	startBtn.addClass("btn btn-danger");
@@ -75,19 +76,16 @@ function start() {
 
 function renderQuestion() {
 //change this too to match ================ new code below
-    // if (questionIndex <= (quesAns.questArray.length - 1)) {
-    //   document.querySelector(".question").innerHTML = quesAns.questArray[index];
+
     $(".start-button").empty();
     $(".correct-answer").empty();
-
-
     $(".question").text(quesAns.questArray[index].question);
     console.log(quesAns.questArray[index].question);
     $(".multiplechoice").empty();
 
     for (var i=0; i<quesAns.questArray[index].answers.length; i++) {
 
-    	var answerBtn = $("<div>");
+    	var answerBtn = $("<button>");
     	answerBtn.addClass("btn btn-dark choice");
     	answerBtn.attr("data-answer", quesAns.questArray[index].answers[i]);
     	answerBtn.text(quesAns.questArray[index].answers[i]);
@@ -118,7 +116,6 @@ function timer() {
 // }
 
 
-
 function decrement() {
 
 	//  Decrease number by one.
@@ -141,7 +138,7 @@ function decrement() {
 		$(".correct-answer").html("The correct answer was: " + quesAns.questArray[index].answerKey);
 		index++
 		console.log(index);
-		setTimeout(continueGame, 1000 * 5);
+		setTimeout(continueGame, 1000 * 3);
 
 	}
 }
@@ -166,7 +163,8 @@ function endGame() {
 	$(".question").empty();
 	$(".multiplechoice").empty();
 	$(".correct-answer").empty();
-	$(".timer").text("You had " + correctScore + " correct answers and " + incorrectScore + " incorrect answers!");
+	$(".correct-answer").text("You had " + correctScore + " correct answers.");
+	$(".incorrect-answer").html("You had " + incorrectScore + " incorrect answers.");
 	setTimeout(start, 1000 * 5);
 }
 
@@ -184,23 +182,23 @@ $(".multiplechoice").on("click", ".choice", function(event) {
 	console.log(quesAns.questArray[index].answerKey);
 
 	if (answerCheck === quesAns.questArray[index].answerKey) {
-		alert("Correct!");
+		// alert("Correct!");
 		correctScore++
-	    // updateScore();
-	    console.log(correctScore);
+		$(".correct-answer").html("That is correct!");
+		clearInterval(intervalId);
 	    index++
-	    continueGame();
+	    setTimeout(continueGame, 1000 * 3);
 
 
 	}
 	// If wrong, alert them they are wrong.
 	else {
-		alert("Wrong!");
+		// alert("Wrong!");
 		$(".correct-answer").html("The correct answer was: " + quesAns.questArray[index].answerKey);
 		incorrectScore++
 		clearInterval(intervalId);
 		index++
-		setTimeout(continueGame, 1000 * 5);
+		setTimeout(continueGame, 1000 * 3);
 		
 	}
 

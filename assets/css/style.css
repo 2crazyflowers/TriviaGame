@@ -7,36 +7,88 @@
 	/*background-color: black;*/
 /*	height and width do nothing to help size of image*/
 	background-image: url(../images/theater2.jpg);
-	height: 620px;
+	height: 650px;
 	background-size: cover;
 	background-position: top;
 	background-repeat: no-repeat;
 }
 
 h1 {
-	padding-top: 150px;
+	text-align: center;
+	background-color: white;
+	margin: 0 auto;
+	padding-top: 0;
+	/*line-height: 60px;*/
+	width: 500px;
+	color: #040001;
+	font-size: 60px;
+	border: 10px dotted #FFC720;
+	/*outline-style: dotted;
+    outline-color: yellow;*/
+}
+
+.countdown {
+	text-shadow: 1px 1px #FFC720;
+	margin-top: 50px;
+	color: #040001;
 }
 
 .question {
-	text-shadow: 1px 1px white;
+	margin: 10px 160px;
+	color: #040001;
+	text-shadow: 1px 1px #FFC720;
+	font-weight: bold;
 }
 
 .questionholder {
-	padding-top: 40px;
+	padding-top: 20px;
 }
 
 .correct-answer {
 	color: #970006;
-	text-shadow: 1px 1px white;
+	font-weight: bold;
+	text-shadow: 1px 1px #FFC720;
 }
 
+.incorrect-answer {
+	color: #970006;
+	font-weight: bold;
+	text-shadow: 1px 1px #FFC720;
+}
+
+/*all buttons*/
 .btn {
 	margin: 20px;
 	padding: 10px 50px;
+	color: white;
+	font-size: 18px;
+	border-radius: 0;
+	color: #FFC720;
 }
 
+/*start button*/
 .btn.btn-danger {
+	margin-top: 170px;
 	padding: 10px 50px;
-	font-size: 18px;
+	font-size: 20px;
 	background-color: #970006;
+}
+
+/*wanted buttons to line up below eachother centered on page*/
+.choice {
+	display: block;
+	margin: 10px auto;
+}
+
+.btn:hover {
+	border: 2px dotted #FFC720;
+}
+
+/*wanted to have the button stay lit up after clicked*/
+.btn:active {
+	border: 2px dotted #FFC720;
+}
+
+.multiplechoice {
+	margin-top: 20px;
 }
