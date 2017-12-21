@@ -3,10 +3,11 @@
 }
 
 .jumbotron {
+	/*------try putting into html body--*/
 	/*background-color: black;*/
 /*	height and width do nothing to help size of image*/
 	background-image: url(../images/theater2.jpg);
-	height: 600px;
+	height: auto;
 	background-size: cover;
 	background-position: top;
 	background-repeat: no-repeat;
@@ -16,8 +17,17 @@ h1 {
 	padding-top: 150px;
 }
 
+.question {
+	text-shadow: 2px 2px white;
+}
+
 .questionholder {
 	padding-top: 40px;
+}
+
+.correct-answer {
+	color: red;
+	text-shadow: 2px 2px white;
 }
 
 .btn {
