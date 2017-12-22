@@ -6,36 +6,44 @@ var quesAns = {
 	questArray: [{
 		question: "Who played Sandy, the leading female role, in the movie Grease?",
 		answers: ["Carrie Fisher", "Olivia Newton-John", "Susan Dey", "Marie Osmond"],
-		answerKey: "Olivia Newton-John"
+		answerKey: "Olivia Newton-John",
+		img: "assets/images/grease.jpg"
 	}, {
 		question: "Which pill did Neo swallow in the movie The Matrix?",
 		answers: ["blue", "purple", "red",
 		"none"],
-		answerKey: "red"
+		answerKey: "red",
+		img: "assets/images/matrix.jpg"
 	}, {
 		question: "What actor played the killer robot in the Terminator?",
 		answers: ["Arnold Schwarzenegger", "It was a real robot", "Hulk Hogan", "Jesse Ventura"],
-		answerKey: "Arnold Schwarzenegger"
+		answerKey: "Arnold Schwarzenegger",
+		img: "assets/images/terminator.jpg"
 	}, {
 		question: "In the movie John Wick, what incident made the John start killing people?",
 		answers: ["someone stole his car", "someone blew up his house", "someone killed his dog", "someone kissed him"],
-		answerKey: "someone killed his dog"
+		answerKey: "someone killed his dog",
+		img: "assets/images/johnwick.jpg"
 	}, {
 		question: "Who played Groot in the Guardians of the Galaxy?",
 		answers: ["Arnold Schwarzenegger", "Sylvestor Stallone", "Jean-Claude Van Damme", "Vin Diesel"],
 		answerKey: "Vin Diesel",
+		img: "assets/images/groot.jpg"
 	}, {
-		question: "In the movie Harry Potter, which  house does Hat choose for Harry Potter?",
+		question: "In the movie Harry Potter and the Philosopher's Stone, which  house does Hat choose for Harry Potter?",
 		answers: [ "Slytherin", "Hufflepuff", "Gryffindor", "Ravenclaw"],
-		answerKey: "Gryffindor"
+		answerKey: "Gryffindor",
+		img: "assets/images/harrypotter.jpg"
 	}, {
 		question: "In The Bourne Supremacy, Jason Bourne detinates a house using what supplies?",
 		answers: ["gun, string and a sock", "gas, magazine and a toaster", "cigarette, toilet paper and newspaper", "popcorn popper, oil and a faulty wire"],
-		answerKey: "gas, magazine and a toaster"
+		answerKey: "gas, magazine and a toaster",
+		img: "assets/images/bourne.jpg"
 	}, {
 		question: "In the movie Payback, how much money did Porter (played by Mel Gibson) want?",
 		answers: ["$140,000", "$100,000", "$70,000", "$300,000"],
-		answerKey: "$70,000"
+		answerKey: "$70,000",
+		img: "assets/images/payback.jpg"
 	}]
 };
 
@@ -45,6 +53,7 @@ var incorrectScore = 0;
 var correctScore = 0;
 var number = 30;
 var intervalId;
+var image;
 
 
 //this function is only used to start the game the first time, not to play again
@@ -69,6 +78,7 @@ function renderQuestion() {
     console.log(quesAns.questArray[index].question);
     $(".multiplechoice").empty();
     $(".incorrect-answer").empty();
+    $(".image").empty();
 
     //to loop through all possible answers, puts them into buttons and append them to the browser
     for (var i=0; i<quesAns.questArray[index].answers.length; i++) {
@@ -117,6 +127,9 @@ function decrement() {
 		$(".timer").html("Time is up!");
 		$(".multiplechoice").empty();
 		$(".correct-answer").html("The correct answer was: " + quesAns.questArray[index].answerKey);
+		$(".image").html("<img src=" + quesAns.questArray[index].img + " width='400px'>");
+		console.log(quesAns.questArray[index].img);
+		
 		index++
 		
 		//this allows user to see correct answer before continuing the game and rendering another question
@@ -151,8 +164,10 @@ function endGame() {
 	$(".question").empty();
 	$(".multiplechoice").empty();
 	$(".correct-answer").empty();
+	$(".image").empty();
 
 	//give user there incorrect/correct answer count
+	$(".question").html("Thanks for playing!");
 	$(".correct-answer").html("You had " + correctScore + " correct answers.");
 	$(".incorrect-answer").html("You had " + incorrectScore + " incorrect answers.");
 	
@@ -188,8 +203,18 @@ $(".multiplechoice").on("click", ".choice", function(event) {
 		$(".multiplechoice").empty();
 		$(".timer").empty();
 		clearInterval(intervalId);
-	    index++
-	    setTimeout(continueGame, 1000 * 2);
+
+
+	    //add image to page of movie===========not working yet
+	    // var image = $("<img>");
+    	// image.addClass("image");
+    	// image.attr("src", quesAns.questArray[index].image);
+    	// $(".image-source").html(image);
+//is this a way to do it?=================================
+		$(".image").html("<img src=" + quesAns.questArray[index].img + " width='400px'>");
+		console.log(quesAns.questArray[index].img);
+		index++
+	    setTimeout(continueGame, 1000 * 3);
 
 
 	}
@@ -201,6 +226,8 @@ $(".multiplechoice").on("click", ".choice", function(event) {
 		$(".timer").empty();
 		incorrectScore++
 		clearInterval(intervalId);
+		$(".image").html("<img src=" + quesAns.questArray[index].img + " width='400px'>");
+		console.log(quesAns.questArray[index].img);
 		index++
 		setTimeout(continueGame, 1000 * 3);
 		

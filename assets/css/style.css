@@ -92,3 +92,8 @@ h1 {
 .multiplechoice {
 	margin-top: 20px;
 }
+
+img {
+	margin: 0 auto;
+	border: 7px dotted #FFC720;;
+}
